@@ -72,7 +72,14 @@ const Login: React.FC<LoginProps> = () => {
       <Text color="red.500" fontSize="10pt" textAlign="center">
         {FIREBASE_ERRORS[error?.message as keyof typeof FIREBASE_ERRORS]}
       </Text>
-      <Button width="100%" height="36px" mt={2} mb={2} type="submit">
+      <Button
+        width="100%"
+        height="36px"
+        mt={2}
+        mb={2}
+        type="submit"
+        isLoading={loading}
+      >
         Log In
       </Button>
       <Flex fontSize="9pt" justifyContent="center">
