@@ -5,6 +5,10 @@ import { auth } from "@/firebase/clientApp";
 
 const OAuthButtons: React.FC = () => {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  // const [signInWithMicrosoft, user, loading, error] = useSignInWithMicrosoft(auth);
+  // const [signInWithGithub, user, loading, error] = useSignInWithGithub(auth);
+  // const [signInWithFacebook, user, loading, error] = useSignInWithFacebook(auth);
+  // const [signInWithTwitter, user, loading, error] = useSignInWithTwitter(auth);
 
   return (
     <Flex mb={4}>
@@ -18,7 +22,7 @@ const OAuthButtons: React.FC = () => {
       <Button
         variant="oauth"
         // isLoading={loading}
-        // onClick={() => signInWithGoogle()}
+        // onClick={() => signInWithMicrosoft()}
       >
         <Image src="/assets/microsoftlogo.png" height="20px" />
       </Button>
@@ -28,23 +32,23 @@ const OAuthButtons: React.FC = () => {
       <Button
         variant="oauth"
         // isLoading={loading}
-        // onClick={() => signInWithGoogle()}
+        // onClick={() => signInWithFacebook()}
       >
         <Image src="/assets/facebooklogo.png" height="20px" />
       </Button>
       <Button
         variant="oauth"
         // isLoading={loading}
-        // onClick={() => signInWithGoogle()}
+        // onClick={() => signInWithTwitter()}
       >
         <Image src="/assets/twitterlogo.png" height="20px" />
       </Button>
 
-      {/* {error && (
-        <Text display="flex"  alignItems="center" justifyContent="center">
+      {error && (
+        <Text display="flex" alignItems="center" justifyContent="center">
           {error.message}
         </Text>
-      )} */}
+      )}
     </Flex>
   );
 };
