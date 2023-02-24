@@ -4,14 +4,17 @@ import { firestore } from "@/firebase/clientApp";
 import { doc, getDoc } from "firebase/firestore";
 import { GetServerSidePropsContext } from "next";
 import safeJsonStringify from "safe-json-stringify";
+import CommunityNotFound from "@/components/community/CommunityNotFound";
 
 type CommunityPageProps = {
   communityData: Community;
 };
 
 const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
-  // console.log("communityData", communityData); all the communityData is not showing up in the console
-
+  // Community was not found in the database
+  if (!communityData) {
+    return <CommunityNotFound />;
+  }
   return <div>Welcome to {communityData.id}</div>;
 };
 
@@ -28,9 +31,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     return {
       props: {
-        communityData: JSON.parse(
-          safeJsonStringify({ id: communityDoc.id, ...communityDoc.data() })
-        ),
+        communityData: communityDoc.exists()
+          ? JSON.parse(
+              safeJsonStringify({ id: communityDoc.id, ...communityDoc.data() })
+            )
+          : "",
       },
     };
   } catch (error) {
