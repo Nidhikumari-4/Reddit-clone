@@ -19,12 +19,21 @@ import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogin } from "react-icons/md";
 import { auth } from "@/firebase/clientApp";
 import { authModalState } from "@/atoms/authModalAtom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { communityState } from "@/atoms/communitiesAtom";
 
 type UserMenuProps = { user?: User | null };
 
 const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
+  const resetCommunityState = useResetRecoilState(communityState);
   const [authModal, setModalState] = useRecoilState(authModalState);
+
+  const logout = async () => {
+    await signOut(auth);
+    //clear community state
+    resetCommunityState();
+  };
+
   return (
     <Menu>
       <MenuButton
@@ -84,7 +93,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
               fontSize="10pt"
               fontWeight={700}
               _hover={{ bg: "blue.500", color: "white" }}
-              onClick={() => signOut(auth)}
+              onClick={logout}
             >
               <Flex align="center">
                 <Icon fontSize={20} mr={2} as={MdOutlineLogin} />
