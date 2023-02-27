@@ -8,7 +8,7 @@ const submitPostPage: React.FC = () => {
     <PageContent>
       <>
         {/* NewPostForm */}
-        <Box p="14px 0px" borderBottom="1px solid" borderColor="white">
+        <Box p="14px 0px">
           <Text fontWeight={600}>Craete a Post</Text>
           <NewPostForm />
         </Box>
