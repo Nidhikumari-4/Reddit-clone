@@ -5,6 +5,7 @@ import { BiPoll } from "react-icons/bi";
 import { IoDocumentText, IoImageOutline } from "react-icons/io5";
 import TabItem from "./TabItem";
 import TextInputs from "./PostForm/TextInputs";
+import ImageUpload from "./PostForm/ImageUpload";
 
 type NewPostFormProps = {};
 
@@ -47,7 +48,18 @@ const NewPostForm: React.FC<NewPostFormProps> = () => {
 
   const handleCreatePost = () => {};
 
-  const handleSelectImage = () => {};
+  const onSelectImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const reader = new FileReader();
+    if (event.target.files?.[0]) {
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    reader.onload = (readerEvent) => {
+      if (readerEvent.target?.result) {
+        setSelectedFile(readerEvent.target.result as string);
+      }
+    };
+  };
 
   const onTextChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -77,6 +89,14 @@ const NewPostForm: React.FC<NewPostFormProps> = () => {
             onChange={onTextChange}
             handleCreatePost={handleCreatePost}
             loading={loading}
+          />
+        )}
+        {selectedTab === "Images & Viseo" && (
+          <ImageUpload
+            selectedFile={selectedFile}
+            setSelectedFile={setSelectedFile}
+            setSelectedTab={setSelectedTab}
+            onSelectImage={onSelectImage}
           />
         )}
       </Flex>
