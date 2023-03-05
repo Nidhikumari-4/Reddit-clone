@@ -1,9 +1,13 @@
 import { Community } from "@/atoms/communitiesAtom";
 import { Post } from "@/atoms/postAtom";
-import { firestore } from "@/firebase/clientApp";
+import { auth, firestore } from "@/firebase/clientApp";
 import usePosts from "@/hooks/usePosts";
+import { Stack } from "@chakra-ui/react";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import PostItem from "./PostItem";
+import PostLoader from "./PostLoader";
 
 type PostProps = {
   communityData: Community;
@@ -11,13 +15,20 @@ type PostProps = {
 };
 
 const Post: React.FC<PostProps> = ({ communityData }) => {
-  //useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { postStateValue, setPostStateValue } = usePosts();
+  const {
+    postStateValue,
+    setPostStateValue,
+    onVote,
+    onDeletePost,
+    onSelectPost,
+  } = usePosts();
 
   const getPosts = async () => {
     try {
+      setLoading(true);
       // get post for the community
       const postsQuery = query(
         collection(firestore, "posts"),
@@ -41,12 +52,33 @@ const Post: React.FC<PostProps> = ({ communityData }) => {
     } catch (error: any) {
       console.log("getPosts error", error.message);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
     getPosts();
   }, []);
 
-  return <div>Posts</div>;
+  return (
+    <>
+      {loading ? (
+        <PostLoader />
+      ) : (
+        <Stack>
+          {postStateValue.posts.map((item) => (
+            <PostItem
+              key={item.id}
+              post={item}
+              userIsCreator={user?.uid === item.creatorId}
+              userVoteValue={undefined}
+              onVote={onVote}
+              onSelectPost={onSelectPost}
+              onDeletePost={onDeletePost}
+            />
+          ))}
+        </Stack>
+      )}
+    </>
+  );
 };
 export default Post;
