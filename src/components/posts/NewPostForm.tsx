@@ -18,6 +18,7 @@ import {
 } from "firebase/firestore";
 import { firestore, storage } from "@/firebase/clientApp";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
+import useSelectFile from "@/hooks/useSelectFile";
 
 type NewPostFormProps = {
   user: User;
@@ -29,7 +30,7 @@ const fromTabs: TabItem[] = [
     icon: IoDocumentText,
   },
   {
-    title: "Images & Viseo",
+    title: "Images & Video",
     icon: IoImageOutline,
   },
   {
@@ -57,9 +58,9 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
   const [textInputs, setTextInputs] = useState({
     title: "",
     body: "",
-    // id: "CfjZ98xDRgfnYoZd4EoG",
   });
-  const [selectedFile, setSelectedFile] = useState<string>();
+  // const [selectedFile, setSelectedFile] = useState<string>();
+  const { selectedFile, setSelectedFile, onSelectFile } = useSelectFile();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -116,18 +117,18 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
     setLoading(false);
   };
 
-  const onSelectImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const reader = new FileReader();
-    if (event.target.files?.[0]) {
-      reader.readAsDataURL(event.target.files[0]);
-    }
+  // const onSelectImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const reader = new FileReader();
+  //   if (event.target.files?.[0]) {
+  //     reader.readAsDataURL(event.target.files[0]);
+  //   }
 
-    reader.onload = (readerEvent) => {
-      if (readerEvent.target?.result) {
-        setSelectedFile(readerEvent.target.result as string);
-      }
-    };
-  };
+  //   reader.onload = (readerEvent) => {
+  //     if (readerEvent.target?.result) {
+  //       setSelectedFile(readerEvent.target.result as string);
+  //     }
+  //   };
+  // };
 
   const onTextChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -164,7 +165,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
             selectedFile={selectedFile}
             setSelectedFile={setSelectedFile}
             setSelectedTab={setSelectedTab}
-            onSelectImage={onSelectImage}
+            onSelectImage={onSelectFile}
           />
         )}
       </Flex>

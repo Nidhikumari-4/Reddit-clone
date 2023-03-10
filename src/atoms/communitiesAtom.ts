@@ -16,7 +16,7 @@ export interface CommunitySnippet {
 }
 export interface CommunityState {
   mySnippets: CommunitySnippet[];
-  //visited communities
+  currentCommunity?: Community;
 }
 export const defaultCommunityState: CommunityState = {
   mySnippets: [],
