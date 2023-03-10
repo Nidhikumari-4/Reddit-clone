@@ -57,6 +57,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
   const [textInputs, setTextInputs] = useState({
     title: "",
     body: "",
+    // id: "CfjZ98xDRgfnYoZd4EoG",
   });
   const [selectedFile, setSelectedFile] = useState<string>();
   const [loading, setLoading] = useState(false);
@@ -66,22 +67,31 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
     const { communityId } = router.query;
 
     // create a new post object => type Post
-    const newPost: Post = {
-      communityId: communityId as string,
-      creatorId: user.uid,
-      creatorDisplayName: user.email!.split("@")[0],
-      title: textInputs.title,
-      body: textInputs.body,
-      numberOfComments: 0,
-      voteStatus: 0,
-      createdAt: serverTimestamp() as Timestamp,
-      id: "",
-    };
+    // const newPost: Post = {
+    //   communityId: communityId as string,
+    //   creatorId: user.uid,
+    //   creatorDisplayName: user.email!.split("@")[0],
+    //   title: textInputs.title,
+    //   body: textInputs.body,
+    //   numberOfComments: 0,
+    //   voteStatus: 0,
+    //   createdAt: serverTimestamp() as Timestamp,
+    // };
+
     setLoading(true);
 
     try {
       // store the post in the database
-      const postDocRef = await addDoc(collection(firestore, "posts"), newPost);
+      const postDocRef = await addDoc(collection(firestore, "posts"), {
+        communityId: communityId as string,
+        creatorId: user.uid,
+        creatorDisplayName: user.email!.split("@")[0],
+        title: textInputs.title,
+        body: textInputs.body,
+        numberOfComments: 0,
+        voteStatus: 0,
+        createdAt: serverTimestamp() as Timestamp,
+      });
 
       // check the selectedFile and upload it to the database
       if (selectedFile) {
