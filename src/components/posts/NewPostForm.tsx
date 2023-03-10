@@ -159,7 +159,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
             loading={loading}
           />
         )}
-        {selectedTab === "Images & Viseo" && (
+        {selectedTab === "Images & Video" && (
           <ImageUpload
             selectedFile={selectedFile}
             setSelectedFile={setSelectedFile}
