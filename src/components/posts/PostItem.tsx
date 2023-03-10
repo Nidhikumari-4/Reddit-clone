@@ -1,6 +1,8 @@
 import { Post } from "@/atoms/postAtom";
 import React, { useState } from "react";
 import {
+  Alert,
+  AlertIcon,
   Flex,
   Icon,
   Image,
@@ -41,9 +43,11 @@ const PostItem: React.FC<PostItemProps> = ({
   onDeletePost,
 }) => {
   const [loadingImage, setLoadingImage] = useState(true);
+  const [loadingDelete, setLoadingDelete] = useState(false);
   const [error, setError] = useState(false);
 
   const handleDelete = async () => {
+    setLoadingDelete(true);
     try {
       const success = await onDeletePost(post);
 
@@ -54,6 +58,7 @@ const PostItem: React.FC<PostItemProps> = ({
     } catch (error: any) {
       setError(error.message);
     }
+    setLoadingDelete(false);
   };
 
   return (
@@ -98,6 +103,12 @@ const PostItem: React.FC<PostItemProps> = ({
       </Flex>
 
       <Flex direction="column" width="100%">
+        {error && (
+          <Alert status="error">
+            <AlertIcon />
+            <Text mr={2}>{error}</Text>
+          </Alert>
+        )}
         <Stack spacing={1} p="10px">
           <Stack direction="row" spacing={0.6} align="center" fontSize="9pt">
             {/* HOMEPAGE CHECK */}
@@ -170,8 +181,14 @@ const PostItem: React.FC<PostItemProps> = ({
               cursor="pointer"
               onClick={handleDelete}
             >
-              <Icon as={AiOutlineDelete} mr={2} />
-              <Text fontSize="9pt">Delete</Text>
+              {loadingDelete ? (
+                <Spinner size="sm" />
+              ) : (
+                <>
+                  <Icon as={AiOutlineDelete} mr={2} />
+                  <Text fontSize="9pt">Delete</Text>
+                </>
+              )}
             </Flex>
           )}
         </Flex>
