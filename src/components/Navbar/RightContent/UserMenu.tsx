@@ -25,13 +25,13 @@ import { communityState } from "@/atoms/communitiesAtom";
 type UserMenuProps = { user?: User | null };
 
 const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
-  const resetCommunityState = useResetRecoilState(communityState);
+  // const resetCommunityState = useResetRecoilState(communityState);
   const [authModal, setModalState] = useRecoilState(authModalState);
 
   const logout = async () => {
     await signOut(auth);
     //clear community state
-    resetCommunityState();
+    // resetCommunityState();
   };
 
   return (
