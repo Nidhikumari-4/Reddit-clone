@@ -80,7 +80,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
         // create the community
         transaction.set(communityDocRef, {
           //createId
-          createorId: user?.uid,
+          creatorId: user?.uid,
           // createdAt
           createdAt: serverTimestamp(),
           //numberOfMembers
