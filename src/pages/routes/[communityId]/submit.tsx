@@ -22,7 +22,12 @@ const submitPostPage: React.FC = () => {
         {/* NewPostForm */}
         <Box p="14px 0px">
           <Text fontWeight={600}>Craete a Post</Text>
-          {user && <NewPostForm user={user} />}
+          {user && (
+            <NewPostForm
+              user={user}
+              communityImageURL={communityStateValue.currentCommunity?.imageURL}
+            />
+          )}
         </Box>
       </>
       <>

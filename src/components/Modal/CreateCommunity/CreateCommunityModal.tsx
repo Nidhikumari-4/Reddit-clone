@@ -23,6 +23,7 @@ import { auth, firestore } from "../../../firebase/clientApp";
 import { doc, runTransaction, serverTimestamp } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
+import useDirectory from "@/hooks/useDirectory";
 
 type CreateCommunityModalProps = { open: boolean; handleClose: () => void };
 
@@ -37,6 +38,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { toggleMenuOpen } = useDirectory();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value.length > 21) return;
@@ -98,6 +100,10 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
           }
         );
       });
+
+      handleClose();
+      toggleMenuOpen();
+      router.push(`/routes/${communityName}`);
     } catch (error: any) {
       console.log("Transaction error", error);
       setError(error.message);
