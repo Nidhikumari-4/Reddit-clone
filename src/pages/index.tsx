@@ -21,7 +21,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-export default function Home() {
+export default function Home({ communityData }) {
   const [user, loadingUser] = useAuthState(auth);
   const [loading, setLoading] = useState(false);
   const {
@@ -161,7 +161,7 @@ export default function Home() {
       <Stack spacing={5} position="sticky" top="50px">
         <Recommendations />
         <Premium />
-        <PersonalHome />
+        <PersonalHome communityData={communityData} />
       </Stack>
     </PageContent>
   );

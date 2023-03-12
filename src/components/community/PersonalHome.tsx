@@ -1,8 +1,13 @@
 import React from "react";
-import { Button, Flex, Icon, Stack, Text } from "@chakra-ui/react";
+import { Button, Flex, Icon, Link, Stack, Text } from "@chakra-ui/react";
 import { FaReddit } from "react-icons/fa";
+import { Community } from "@/atoms/communitiesAtom";
 
-const PersonalHome: React.FC = () => {
+type PersonalHomeProps = {
+  communityData: Community;
+};
+
+const PersonalHome: React.FC<PersonalHomeProps> = ({ communityData }) => {
   return (
     <Flex
       direction="column"
@@ -33,7 +38,11 @@ const PersonalHome: React.FC = () => {
           <Text fontSize="9pt">
             Your personal Reddit frontpage, built for you.
           </Text>
-          <Button height="30px">Create Post</Button>
+          <Button height="30px" textDecoration="none">
+            <Link href={`/routes/${communityData?.id}/submit`}>
+              Create post
+            </Link>
+          </Button>
           <Button variant="outline" height="30px">
             Create Community
           </Button>
