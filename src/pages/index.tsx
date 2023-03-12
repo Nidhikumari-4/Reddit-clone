@@ -158,7 +158,7 @@ export default function Home() {
       </>
 
       {/* Recommendations */}
-      <Stack spacing={5}>
+      <Stack spacing={5} position="sticky" top="50px">
         <Recommendations />
         <Premium />
         <PersonalHome />
