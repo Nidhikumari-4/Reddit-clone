@@ -26,8 +26,8 @@ const Communities: React.FC<CommunitiesProps> = () => {
             <MenuListItem
               key={snippet.communityId}
               icon={FaReddit}
-              displayText={`r/${snippet.communityId}`}
-              link={`/r/${snippet.communityId}`}
+              displayText={`routes/${snippet.communityId}`}
+              link={`/routes/${snippet.communityId}`}
               iconColor="brand.100"
               imageURL={snippet.imageURL}
             />
@@ -53,8 +53,8 @@ const Communities: React.FC<CommunitiesProps> = () => {
           <MenuListItem
             key={snippet.communityId}
             icon={FaReddit}
-            displayText={`r/${snippet.communityId}`}
-            link={`/r/${snippet.communityId}`}
+            displayText={`routes/${snippet.communityId}`}
+            link={`/routes/${snippet.communityId}`}
             iconColor="blue.500"
             imageURL={snippet.imageURL}
           />

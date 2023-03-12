@@ -93,7 +93,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
                 (snippet) => snippet.communityId === item.id
               );
               return (
-                <Link key={item.id} href={`/r/${item.id}`}>
+                <Link key={item.id} href={`/routes${item.id}`}>
                   <Flex
                     position="relative"
                     align="center"
@@ -130,7 +130,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
                             textOverflow: "ellipsis",
                           }}
                         >
-                          {`r/${item.id}`}
+                          {`routes/${item.id}`}
                         </span>
                       </Flex>
                     </Flex>

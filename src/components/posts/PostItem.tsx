@@ -72,7 +72,7 @@ const PostItem: React.FC<PostItemProps> = ({
       console.log("Post deleted successfully");
 
       if (singlePostPage) {
-        router.push(`/r/${post.communityId}`);
+        router.push(`/routes/${post.communityId}`);
       }
     } catch (error: any) {
       setError(error.message);
@@ -143,13 +143,13 @@ const PostItem: React.FC<PostItemProps> = ({
                 ) : (
                   <Icon as={FaReddit} fontSize="18pt" mr={1} color="blue.500" />
                 )}
-                <Link href={`r/${post.communityId}`}>
+                <Link href={`routes/${post.communityId}`}>
                   <Text
                     fontWeight={700}
                     _hover={{ textDecoration: "underline" }}
                     onClick={(event) => event.stopPropagation()}
                   >
-                    {`r/${post.communityId}`}
+                    {`routes/${post.communityId}`}
                   </Text>
                 </Link>
                 <Icon as={BsDot} color="gray.500" fontSize={8} />

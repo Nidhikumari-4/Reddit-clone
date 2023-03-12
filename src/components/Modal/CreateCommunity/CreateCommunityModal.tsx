@@ -103,7 +103,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
 
       handleClose();
       toggleMenuOpen();
-      router.push(`/r/${communityName}`);
+      router.push(`/routes/${communityName}`);
     } catch (error: any) {
       console.log("Transaction error", error);
       setError(error.message);
