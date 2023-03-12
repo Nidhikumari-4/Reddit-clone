@@ -21,17 +21,17 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
   console.log("communityData", communityData);
   const setCommunityStateValue = useSetRecoilState(communityState);
 
-  // Community was not found in the database
-  if (!communityData) {
-    return <CommunityNotFound />;
-  }
-
   useEffect(() => {
     setCommunityStateValue((prev) => ({
       ...prev,
       currentCommunity: communityData,
     }));
   }, [communityData]);
+
+  // Community was not found in the database
+  if (!communityData) {
+    return <CommunityNotFound />;
+  }
 
   return (
     <>
