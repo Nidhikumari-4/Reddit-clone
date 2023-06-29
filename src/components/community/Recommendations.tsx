@@ -93,7 +93,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
                 (snippet) => snippet.communityId === item.id
               );
               return (
-                <Link key={item.id} href={`/r/${item.id}`}>
+                <>
                   <Flex
                     position="relative"
                     align="center"
@@ -102,38 +102,41 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
                     borderColor="gray.200"
                     p="10px 12px"
                   >
-                    <Flex width="80%" align="center">
-                      <Flex width="15%">
-                        <Text>{index + 1}</Text>
-                      </Flex>
+                    <Link key={item.id} href={`/r/${item.id}`}>
+                      <Flex width="80%" align="center">
+                        <Flex width="25%">
+                          <Text>{index + 1}</Text>
+                        </Flex>
 
-                      <Flex align="center" width="80%">
-                        {item.imageURL ? (
-                          <Image
-                            src={item.imageURL}
-                            borderRadius="full"
-                            boxSize="28px"
-                            mr={2}
-                          />
-                        ) : (
-                          <Icon
-                            as={FaReddit}
-                            fontSize={30}
-                            color="brand.100"
-                            mr={2}
-                          />
-                        )}
-                        <span
-                          style={{
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                          }}
-                        >
-                          {`r/${item.id}`}
-                        </span>
+                        <Flex align="center" width="80%">
+                          {item.imageURL ? (
+                            // eslint-disable-next-line jsx-a11y/alt-text
+                            <Image
+                              src={item.imageURL}
+                              borderRadius="full"
+                              boxSize="28px"
+                              mr={2}
+                            />
+                          ) : (
+                            <Icon
+                              as={FaReddit}
+                              fontSize={30}
+                              color="brand.100"
+                              mr={2}
+                            />
+                          )}
+                          <span
+                            style={{
+                              whiteSpace: "nowrap",
+                              // overflow: "hidden",
+                              textOverflow: "ellipsis",
+                            }}
+                          >
+                            {`r/${item.id}`}
+                          </span>
+                        </Flex>
                       </Flex>
-                    </Flex>
+                    </Link>
                     <Box position="absolute" right="10px">
                       <Button
                         height="22px"
@@ -148,7 +151,7 @@ const Recommendations: React.FC<RecommendationsProps> = () => {
                       </Button>
                     </Box>
                   </Flex>
-                </Link>
+                </>
               );
             })}
             <Box p="10px 20px">
