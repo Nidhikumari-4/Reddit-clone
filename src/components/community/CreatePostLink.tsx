@@ -1,4 +1,5 @@
 import { authModalState } from "@/atoms/authModalAtom";
+import { Community } from "@/atoms/communitiesAtom";
 import { auth } from "@/firebase/clientApp";
 import useDirectory from "@/hooks/useDirectory";
 import { Flex, Icon, Input } from "@chakra-ui/react";
@@ -10,7 +11,9 @@ import { FaReddit } from "react-icons/fa";
 import { IoImageOutline } from "react-icons/io5";
 import { useSetRecoilState } from "recoil";
 
-const CreatePostLink: React.FC = () => {
+type CreatePostProps = {};
+
+const CreatePostLink: React.FC<CreatePostProps> = ({}) => {
   const router = useRouter();
   const [user] = useAuthState(auth);
   const setAuthModalState = useSetRecoilState(authModalState);
@@ -24,11 +27,11 @@ const CreatePostLink: React.FC = () => {
     const { communityId } = router.query;
 
     if (communityId) {
-      router.push(`r/${communityId}/submit`);
+      router.push(`${router.query.communityId}/submit`);
       return;
     }
 
-    // open directory menu
+    // Open directory menu to select community to post to
     toggleMenuOpen();
   };
 
