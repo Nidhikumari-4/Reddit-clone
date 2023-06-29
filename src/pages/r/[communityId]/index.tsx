@@ -9,7 +9,6 @@ import Header from "@/components/community/Header";
 import PageContent from "@/components/Layout/PageContent";
 import CreatePostLink from "@/components/community/CreatePostLink";
 import Post from "@/components/posts/Post";
-import { log } from "console";
 import { useSetRecoilState } from "recoil";
 import About from "@/components/community/About";
 

@@ -39,9 +39,7 @@ const PersonalHome: React.FC<PersonalHomeProps> = ({ communityData }) => {
             Your personal Reddit frontpage, built for you.
           </Text>
           <Button height="30px" textDecoration="none">
-            <Link href={`/routes/${communityData?.id}/submit`}>
-              Create post
-            </Link>
+            <Link href={`/r/${communityData?.id}/submit`}>Create post</Link>
           </Button>
           <Button variant="outline" height="30px">
             Create Community

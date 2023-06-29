@@ -21,7 +21,7 @@ const SubmitPostPage = () => {
       <>
         {/* NewPostForm */}
         <Box p="14px 0px">
-          <Text fontWeight={600}>Craete a Post</Text>
+          <Text fontWeight={600}>Create a Post</Text>
           {user && (
             <NewPostForm
               user={user}
