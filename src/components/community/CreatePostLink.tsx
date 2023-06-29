@@ -29,10 +29,10 @@ const CreatePostLink: React.FC<CreatePostProps> = ({}) => {
     if (communityId) {
       router.push(`${router.query.communityId}/submit`);
       return;
+    } else {
+      // Open directory menu to select community to post to
+      toggleMenuOpen();
     }
-
-    // Open directory menu to select community to post to
-    toggleMenuOpen();
   };
 
   return (
@@ -51,7 +51,7 @@ const CreatePostLink: React.FC<CreatePostProps> = ({}) => {
       <Input
         placeholder="Create Post"
         fontSize="10pt"
-        _placeholder={{ color: "gray.500" }}
+        _placeholder={{ opacity: 0.4, color: "gray.500" }}
         _hover={{
           bg: "white",
           border: "1px solid",
