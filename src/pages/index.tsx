@@ -136,33 +136,37 @@ export default function Home({ communityData }) {
         {loading ? (
           <PostLoader />
         ) : (
-          <Stack>
-            {postStateValue.posts.map((post) => (
-              <PostItem
-                key={post.id}
-                post={post}
-                onSelectPost={onSelectPost}
-                onDeletePost={onDeletePost}
-                onVote={onVote}
-                userVoteValue={
-                  postStateValue.postVotes.find(
-                    (item) => item.postId === post.id
-                  )?.voteValue
-                }
-                userIsCreator={user?.uid === post.creatorId}
-                homePage
-              />
-            ))}
-          </Stack>
+          <>
+            <Stack>
+              {postStateValue.posts.map((post) => (
+                <PostItem
+                  key={post.id}
+                  post={post}
+                  onSelectPost={onSelectPost}
+                  onDeletePost={onDeletePost}
+                  onVote={onVote}
+                  userVoteValue={
+                    postStateValue.postVotes.find(
+                      (item) => item.postId === post.id
+                    )?.voteValue
+                  }
+                  userIsCreator={user?.uid === post.creatorId}
+                  homePage
+                />
+              ))}
+            </Stack>
+          </>
         )}
       </>
 
       {/* Recommendations */}
-      <Stack spacing={5} position="sticky" top="50px">
-        <Recommendations />
-        <Premium />
-        <PersonalHome communityData={communityData} />
-      </Stack>
+      <>
+        <Stack spacing={5} position="sticky" top="50px">
+          <Recommendations />
+          <Premium />
+          <PersonalHome communityData={communityData} />
+        </Stack>
+      </>
     </PageContent>
   );
 }
